@@ -4,6 +4,7 @@ fn main() {
     let input = fs::read_to_string("src/input.txt").unwrap();
 
     part1(&input);
+    part2(&input);
 }
 
 fn part1(input: &str) {
@@ -38,6 +39,22 @@ fn part1(input: &str) {
     }
 
     println!("{}", two * three)
+}
 
+fn part2(input: &str) {
+    for x_line in input.lines() {
+        for y_line in input.lines() {
+            let intersections: Vec<char> = x_line.chars()
+                .zip(y_line.chars())
+                .filter(|&(x, y)| x == y)
+                .map(|(x, _)| x)
+                .collect();
 
+            if intersections.len() + 1 == x_line.len() {
+                let stringyfied: String = intersections.iter().collect();
+                println!("{}", stringyfied);
+                return;
+            }
+        }
+    }
 }
